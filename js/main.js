@@ -148,15 +148,7 @@ class Articulo {
         this.precio = precio;
       };
 };
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*let listaPreciosArticulosStorage = (JSON.parse(localStorage.getItem("listaPrecioArticulos")) == null) ? ([]) : JSON.parse(localStorage.getItem("listaPrecioArticulos"));
-if (listaPreciosArticulosStorage.length > 0) {
-   localStorage.setItem("listaPrecioArticulos", JSON.stringify([...listaPreciosArticulosStorage]));
-   listaPrecioArticulos = [...listaPreciosArticulosStorage];
-} else {
-   localStorage.setItem("listaPrecioArticulos", JSON.stringify([...listaPrecioArticulos]));
-};*/
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 let carritoComprasStorage = (JSON.parse(localStorage.getItem("carritoCompras")) == null) ? ([]) : JSON.parse(localStorage.getItem("carritoCompras"));
 if (carritoComprasStorage.length > 0) {
    localStorage.setItem("carritoCompras", JSON.stringify([...carritoComprasStorage]));
@@ -174,15 +166,15 @@ if (articulosEncontradosStorage.length > 0) {
 articulosEncontrados.length > 0 && buscarArticulosHtml(articulosEncontrados);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-document.getElementById("idCrearArticuloCodigo").value = localStorage.getItem("idCrearArticuloCodigo");
-document.getElementById("idCrearArticuloNombre").value = localStorage.getItem("idCrearArticuloNombre");
-document.getElementById("idCrearArticuloMarca").value = localStorage.getItem("idCrearArticuloMarca");
-document.getElementById("idCrearArticuloCategoria").value = localStorage.getItem("idCrearArticuloCategoria") || "";
-document.getElementById("idCrearArticuloPrecio").value = localStorage.getItem("idCrearArticuloPrecio");
-document.getElementById("idBuscarArticuloCategoria").value = localStorage.getItem("idBuscarArticuloCategoria");
+const articuloFormulario = JSON.parse(localStorage.getItem("articuloFormulario")) || {};
+document.getElementById("idCrearArticuloCodigo").value = articuloFormulario.codigo || "";
+document.getElementById("idCrearArticuloNombre").value = articuloFormulario.nombre || "";
+document.getElementById("idCrearArticuloMarca").value = articuloFormulario.marca || "";
+document.getElementById("idCrearArticuloCategoria").value = articuloFormulario.categoria || "";
+document.getElementById("idCrearArticuloPrecio").value = articuloFormulario.precio || "";
+document.getElementById("idBuscarArticuloCategoria").value = localStorage.getItem("idBuscarArticuloCategoria") || "";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-
 function crearMensajeDialog({tipo, texto}){
     //
     let titulo;
@@ -246,11 +238,14 @@ function cargarArticulo(e){
      //
      localStorage.setItem("listaPrecioArticulos", JSON.stringify(listaPrecioArticulos));
      //
+     localStorage.removeItem("articuloFormulario");
+     /*
      localStorage.removeItem("idCrearArticuloCodigo");
      localStorage.removeItem("idCrearArticuloNombre");
      localStorage.removeItem("idCrearArticuloMarca");
      localStorage.removeItem("idCrearArticuloCategoria");
      localStorage.removeItem("idCrearArticuloPrecio");
+     */
      //
      document.getElementById("idCrearArticuloCodigo").value = "";
      document.getElementById("idCrearArticuloNombre").value = "";
@@ -721,25 +716,35 @@ tagBotonVaciarCarrito.addEventListener("click", vaciarCarritoCompras);
 const tagBotonConfirmarCarrito = document.getElementById("idBotonConfirmarCarritoCompras");
 tagBotonConfirmarCarrito.addEventListener("click", confirmarCarritoCompras);
 //
+function guardarDatosFormulario(){
+  const valores = 
+  {
+    codigo: document.getElementById("idCrearArticuloCodigo").value,
+    nombre: document.getElementById("idCrearArticuloNombre").value,
+    marca: document.getElementById("idCrearArticuloMarca").value,
+    categoria: document.getElementById("idCrearArticuloCategoria").value,
+    precio: document.getElementById("idCrearArticuloPrecio").value
+  }
+  localStorage.setItem("articuloFormulario", JSON.stringify(valores));
+}
 const tagInputCrearArticuloCodigo = document.getElementById("idCrearArticuloCodigo");
-tagInputCrearArticuloCodigo.addEventListener("input",()=>localStorage.setItem("idCrearArticuloCodigo",document.getElementById("idCrearArticuloCodigo").value));
+tagInputCrearArticuloCodigo.addEventListener("input", guardarDatosFormulario);
 //
 const tagInputCrearArticuloNombre = document.getElementById("idCrearArticuloNombre");
-tagInputCrearArticuloNombre.addEventListener("input",()=>localStorage.setItem("idCrearArticuloNombre",document.getElementById("idCrearArticuloNombre").value));
+tagInputCrearArticuloNombre.addEventListener("input",guardarDatosFormulario);
 //
 const tagInputCrearArticuloMarca = document.getElementById("idCrearArticuloMarca");
-tagInputCrearArticuloMarca.addEventListener("input",()=>localStorage.setItem("idCrearArticuloMarca",document.getElementById("idCrearArticuloMarca").value));
+tagInputCrearArticuloMarca.addEventListener("input",guardarDatosFormulario);
 //
 const tagInputCrearArticuloCategoria = document.getElementById("idCrearArticuloCategoria");
-tagInputCrearArticuloCategoria.addEventListener("input",()=>localStorage.setItem("idCrearArticuloCategoria",document.getElementById("idCrearArticuloCategoria").value));
+tagInputCrearArticuloCategoria.addEventListener("input",guardarDatosFormulario);
 //
 const tagInputCrearArticuloPrecio = document.getElementById("idCrearArticuloPrecio");
-tagInputCrearArticuloPrecio.addEventListener("input",()=>localStorage.setItem("idCrearArticuloPrecio",document.getElementById("idCrearArticuloPrecio").value));
+tagInputCrearArticuloPrecio.addEventListener("input",guardarDatosFormulario);
 //
 const tagInputBuscarArticuloCategoria = document.getElementById("idBuscarArticuloCategoria");
 tagInputBuscarArticuloCategoria.addEventListener("input",()=>localStorage.setItem("idBuscarArticuloCategoria",document.getElementById("idBuscarArticuloCategoria").value));
 //
-
 function crearMensajeAviso(texto){
     //
     let htmlContenido;
@@ -785,7 +790,6 @@ async function inicioModulo(){
           //
           let listaPreciosArticulosStorage = (JSON.parse(localStorage.getItem("listaPrecioArticulos")) == null) ? ([]) : JSON.parse(localStorage.getItem("listaPrecioArticulos"));
           //
-          console.log("0010")
           if (listaPreciosArticulosStorage.length > 0) {
              localStorage.setItem("listaPrecioArticulos", JSON.stringify([...listaPreciosArticulosStorage]));
              listaPrecioArticulos = [...listaPreciosArticulosStorage];
