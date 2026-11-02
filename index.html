@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pre-Entrega 9: ASINCRONISMO</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="headerContenedor">
+        <div class="headerContenedorElementos">
+          <h1 class="headerTitulo">
+            MODULO DE ARTICULOS, PRECIOS, COMPRAS(ASINCRONISMO)
+          </h1>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div id="idMainContenedor" class="mainContenedor">
+        <div id="idMainContenedorElementos" class="mainContenedorElementos">
+          <h2 id="idMainTituloCrear" class="mainTitulo">Crear Articulo</h2>
+          <div
+            id="idMainContenedorFormularioCrear"
+            class="mainContenedorFormulario"
+          >
+            <form
+              id="idMainFormularioCrear"
+              class="mainFormulario"
+              method="POST"
+            >
+              <div class="mainFormularioFila">
+                <label class="labelGlobal" for="idCrearArticuloCodigo"
+                  >Codigo:</label
+                >
+                <input
+                  class="inputGlobal"
+                  type="text"
+                  id="idCrearArticuloCodigo"
+                  name="crearArticuloCodigo"
+                  required=""
+                />
+              </div>
+              <div class="mainFormularioFila">
+                <label class="labelGlobal" for="idCrearArticuloNombre"
+                  >Nombre:</label
+                >
+                <input
+                  class="inputGlobal"
+                  type="text"
+                  id="idCrearArticuloNombre"
+                  name="crearArticuloNombre"
+                  required=""
+                />
+              </div>
+              <div class="mainFormularioFila">
+                <label class="labelGlobal" for="idCrearArticuloMarca"
+                  >Marca:</label
+                >
+                <input
+                  class="inputGlobal"
+                  type="text"
+                  id="idCrearArticuloMarca"
+                  name="crearArticuloMarca"
+                  required=""
+                />
+              </div>
+              <div class="mainFormularioFila">
+                <label class="labelGlobal" for="idCrearArticuloCategoria"
+                  >Categoria:</label
+                >
+                <select
+                  id="idCrearArticuloCategoria"
+                  name="crearArticuloCategoria"
+                  required
+                >
+                  <option value="" selected>Seleccione Una Categoria</option>
+                  <option value="TELEVISOR">TELEVISOR</option>
+                  <option value="COCINA">COCINA</option>
+                  <option value="HELADERA">HELADERA</option>
+                </select>
+              </div>
+              <div class="mainFormularioFila">
+                <label class="labelGlobal" for="idCrearArticuloPrecio"
+                  >Precio:</label
+                >
+                <input
+                  class="inputGlobal"
+                  type="number"
+                  id="idCrearArticuloPrecio"
+                  name="crearArticuloPrecio"
+                  required=""
+                />
+              </div>
+              <div class="mainFormularioFila">
+                <button
+                  id="idBotonCrearArticulo"
+                  class="buttonGlobal"
+                  type="submit"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <h2 id="idMainTituloBuscar" class="mainTitulo">Buscar Articulos</h2>
+          <div
+            id="idMainContenedorFormularioBuscar"
+            class="mainContenedorFormulario"
+          >
+            <form
+              id="idMainFormularioBuscar"
+              class="mainFormulario"
+              method="POST"
+            >
+              <div class="mainFormularioFila">
+                <label class="labelGlobal" for="idBuscarArticuloCategoria"
+                  >Categoria:</label
+                >
+                <select
+                  id="idBuscarArticuloCategoria"
+                  name="buscarArticuloCategoria"
+                >
+                  <option value="">TODOS</option>
+                  <option value="TELEVISOR">TELEVISORES</option>
+                  <option value="COCINA">COCINAS</option>
+                  <option value="HELADERA">HELADERAS</option>
+                </select>
+              </div>
+              <div class="mainFormularioFila">
+                <button
+                  id="idBotonBuscarArticulo"
+                  class="buttonGlobal"
+                  type="submit"
+                >
+                  Buscar
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div id="idMainContenedorResultados" class="mainContenedorResultados">
+            <div id="idMainResultados" class="mainResultados"></div>
+          </div>
+
+          <h2 id="idTituloBotonesCarrito" class="mainTitulo">
+            Carrito de Compras
+          </h2>
+          <div
+            id="idMainContenedorCarritoComprasBotones"
+            class="mainContenedorCarritoComprasBotones"
+          >
+            <div
+              id="idMainCarritoComprasBotones"
+              class="mainCarritoComprasBotones"
+            >
+              <button id="idBotonVerCarritoCompras" class="buttonGlobal">
+                Ver
+              </button>
+              <button id="idBotonOcultarCarritoCompras" class="buttonGlobal">
+                Ocultar
+              </button>
+              <button id="idBotonVaciarCarritoCompras" class="buttonGlobal">
+                Vaciar
+              </button>
+              <button id="idBotonConfirmarCarritoCompras" class="buttonGlobal">
+                Confirmar
+              </button>
+            </div>
+          </div>
+          <div
+            id="idMainContenedorCarritoCompras"
+            class="mainContenedorCarritoCompras"
+          >
+            <p id="idTotalCarrito" class="totalCarrito"></p>
+            <div id="idMainCarritoCompras" class="mainCarritoCompras"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

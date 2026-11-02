@@ -1,0 +1,258 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0; 
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke;
+    padding: 1rem;  
+ }
+/******************
+   CLASES HEADER
+*******************/
+.headerContenedor {
+     display: flex;
+     align-content: center;
+     justify-content: center;
+}
+.headerContenedorElementos{
+     width: 80%;
+} 
+.headerTitulo {
+    background-color: rgb(164, 240, 167);  
+    color: green;
+    text-align: center;
+    text-justify: center;
+    border-radius: 8px;
+    padding: 1rem; 
+}
+/******************
+   CLASES MAIN 
+*******************/
+.mainContenedorElementos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mainTitulo {
+    border-radius: 8px;  
+    text-align: center;
+    text-justify: center;
+    padding: 10px;
+    color: green;
+    background-color:  #ddeeec;
+    width: 70%; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/******************
+   CLASES MAIN FORMULARIO
+*******************/
+.mainContenedorFormulario {
+    border-radius: 8px;  
+    padding: 10px;
+    width: 70%;
+    background-color:  #ddeeec;
+}
+.mainFormulario {
+    padding: 10px;
+}
+.mainFormularioFila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.mainFormularioFila label{
+    min-width: 10rem;
+    font-size: 1.25rem;
+    color: green;
+}
+.mainFormularioFila input,.mainFormularioFila select {
+    flex: 1;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+.mainFormularioFila select{
+    text-transform: none;
+}
+/******************************
+   MAIN FORMULARIO RESULTADOS
+*********************************/
+.mainContenedorResultados, .mainContenedorCarritoCompras{
+    margin-top: 1rem;
+    width: 70%;
+    background-color:  #ddeeec;
+}
+.mainResultados, .mainCarritoCompras{
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 15px;
+    align-content: flex-start;
+    width: 100%;
+    max-width: 100%;
+}
+.articuloEncontrado, .carritoComprasArticulo{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: rgb(174, 226, 169);
+    max-width: 100%;
+    border: 1px solid rgb(47, 134, 39);
+    border-radius: 0.5rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin: 15px;
+}
+.contenedorCard{  
+    height: 20rem;
+    width: 10rem; 
+    display: flex; 
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.contenedorCardDatos {
+    height: 15rem;
+    width: 100%;
+    max-width: 100%;
+}
+.contenedorCardDatosFila{
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+}
+.cardDatosFilaEtiqueta{
+    min-width: 40%;
+    font-size: 14px;
+    color: green;
+}
+.cardDatosFilaValor{
+    word-break: break-word;
+    overflow-wrap: break-word;
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+}
+.resultadoCantidadDiv{
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+}
+.labelCard{
+    font-size: 14px;  
+    color: green;
+    font-weight: bold;
+}
+.inputCard{
+    text-align: right;
+    font-size: 14px;
+}
+.totalArticuloBuscado, .totalArticuloComprado{
+    font-size: 14px;
+    padding: 5px;
+}
+.contenedorCardDatosBoton{
+    display: flex;
+    justify-content: center;
+}
+.buttonCard{
+    background-color: green;
+    color:white;
+    padding: 0.5rem;
+    width: 90%;
+    height: 70%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+/******************
+   CLASES GLOBALES
+*******************/
+.buttonGlobal {
+    color: white;
+    background-color: green;
+    width: 100%;
+    padding: 0.25rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+/******************
+   CLASES MENSAJE DIALOG
+*******************/
+.mensajeDialog {
+    width: 350px;
+    padding: 25px;
+    border: none;
+    background-color: rgb(194, 178, 225);
+    color: rgb(1, 61, 1);
+    border-radius: 8px;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}
+/******************
+   CLASES CARRITO DE COMPRAS BOTONES
+*******************/
+.mainContenedorCarritoComprasBotones{
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 1rem; */
+    width: 70%;
+    background-color:  #ddeeec;
+    border-radius: 8px;
+    padding: 1rem;
+}
+.mainContenedorCarritoComprasBotones h2{
+    text-align: center;
+}
+.mainCarritoComprasBotones{
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+}
+.tituloBotonesCarrito {
+    color: green;
+    padding: 0.5rem;
+}
+.mainCarritoComprasTotalArticulo{
+    color: green;
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+.mainCarritoComprasBotones .buttonGlobal {
+    color: white;
+    background-color: green;
+    width: 80%;
+    font-size: bold;
+    padding: 0.25rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+/******************************
+   MAIN CARRITO COMPRAS RESULTADOS
+*********************************/
+.totalCarrito{
+    text-align: center;
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+}
+.mensajeAviso{
+    color:  green;
+    background-color: cyan;
+    border: 2px solid greenyellow;
+    position: fixed;
+    border-radius: 15px;
+    padding: 20px 100px 20px 100px;
+    top: 10%;
+    left: 24%;
+    z-index: 1000;
+    font-size: 50px;
+}
