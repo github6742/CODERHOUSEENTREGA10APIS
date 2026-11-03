@@ -1,138 +1,8 @@
 let listaPrecioArticulos = [];
-//
-listaPrecioArticulos = [
-      {
-        id: 1,
-        codigo: "TVS0033PCO01",
-        nombre: "TELEVISOR SMART TV PHILCO 33 PULGADAS", 
-        marca: "PHILCO",
-        categoria: "TELEVISOR",
-        precio: 331000
-      },                                 
-      {
-        id: 2,
-        codigo: "TVS0033PHI02",
-        nombre: "TELEVISOR SMART TV PHILLIPS 33 PULGADAS", 
-        marca: "PHILLIPS",
-        categoria: "TELEVISOR",
-        precio: 332000
-      },                                 
-      {
-        id: 3,
-        codigo: "TVS0033SAM03",
-        nombre: "TELEVISOR SMART TV SAMSUNG 33 PULGADAS", 
-        marca: "SAMSUNG",
-        categoria: "TELEVISOR",
-        precio: 333000
-      },                                 
-      {
-        id: 4,
-        codigo: "TVS0033JVL04",
-        nombre: "TELEVISOR SMART TV JVL 33 PULGADAS",
-        marca: "JVL",
-        categoria: "TELEVISOR",
-        precio: 334000
-      },                                 
-      {
-        id: 5,
-        codigo: "TVS0042PCO05",
-        nombre: "TELEVISOR SMART TV PHILCO 42 PULGADAS",
-        marca: "PHILCO",
-        categoria: "TELEVISOR",
-        precio: 425000
-      },                                 
-      {
-        id: 6,
-        codigo: "TVS0042PHI06",
-        nombre: "TELEVISOR SMART TV PHILLIPS 42 PULGADAS",
-        marca: "PHILLIPS",
-        categoria: "TELEVISOR",
-        precio: 426000
-      },                                 
-      {
-        id: 7,
-        codigo: "TVS0042SAM07",
-        nombre: "TELEVISOR SMART TV SAMSUNG 42 PULGADAS",
-        marca: "SAMSUNG",
-        categoria: "TELEVISOR",
-        precio: 427000
-      },                                 
-      {
-        id: 8,
-        codigo: "TVS0042JVL08",
-        nombre: "TELEVISOR SMART TV JVL 42 PULGADAS", 
-        marca: "JVL",
-        categoria: "TELEVISOR",
-        precio: 580000
-      },                                 
-      {
-        id: 9,
-        codigo: "COCESC009",
-        nombre: "COCINA ESCORIAL",
-        marca: "ESCORIAL",
-        categoria: "COCINA",
-        precio: 590000
-      },                                 
-      {
-        id: 10,
-        codigo: "COCDRE010",
-        nombre: "COCINA DREAN",
-        marca: "DREAN",
-        categoria: "COCINA",
-        precio: 510000
-      },                                 
-      {
-        id: 11,
-        codigo: "COCWHI011",
-        nombre: "COCINA WHIRLPOOL", 
-        marca: "WHIRLPOOL",
-        categoria: "COCINA",
-        precio: 511000
-      },                                 
-      {
-        id: 12,
-        codigo: "COCELE012",
-        nombre: "COCINA ELECTROLUX", 
-        marca: "ELECTROLUX",
-        categoria: "COCINA",
-        precio: 512000
-      },                                 
-      {
-        id: 13,
-        codigo: "HELELE0013",
-        nombre: "HELADERA ELECTOLUX INVERTER NO FROST",
-        marca: "ELECTROLUX",
-        categoria: "HELADERA",
-        precio: 1300000
-      },                                 
-      {
-        id: 14,
-        codigo: "HELWHI0014",
-        nombre: "HELADERA WHIRLPOOL INVERTER NO FROST",
-        marca: "WHIRLPOOL",
-        categoria: "HELADERA",
-        precio: 1400000
-      },                                 
-      {
-        id: 15,
-        codigo: "HELGAG0015",
-        nombre: "HELADERA GAFA INVERTER",
-        marca: "SAMSUNG",
-        categoria: "HELADERA",
-        precio: 1500000
-      },                                 
-      {
-        id: 16,
-        codigo: "HELDRE0016",
-        nombre: "HELADERA DREAN INVERTER",
-        marca: "DREAN",
-        categoria: "HELADERA",
-        precio: 1600000
-      }
-];
-
 let carritoCompras = [];
 let articulosEncontrados = [];
+//
+const url = "./db/data.json";
 class Articulo {
       constructor(id,
                   codigo, 
@@ -239,13 +109,6 @@ function cargarArticulo(e){
      localStorage.setItem("listaPrecioArticulos", JSON.stringify(listaPrecioArticulos));
      //
      localStorage.removeItem("articuloFormulario");
-     /*
-     localStorage.removeItem("idCrearArticuloCodigo");
-     localStorage.removeItem("idCrearArticuloNombre");
-     localStorage.removeItem("idCrearArticuloMarca");
-     localStorage.removeItem("idCrearArticuloCategoria");
-     localStorage.removeItem("idCrearArticuloPrecio");
-     */
      //
      document.getElementById("idCrearArticuloCodigo").value = "";
      document.getElementById("idCrearArticuloNombre").value = "";
@@ -407,7 +270,7 @@ function agregarAlCarritoDatos(articuloId){
     //
   };
   //
-  crearMensajeDialog({tipo: "exito", texto: "El articulo fue agregado"});   
+  //crearMensajeDialog({tipo: "exito", texto: "El articulo fue agregado"});   
   //  
 }
 
@@ -420,13 +283,15 @@ function agregarAlCarritoHtml(articuloId){
 function agregarAlCarrito(e,articuloId){
   //
   e.preventDefault();
-  //  
+  // 
   if (carritoCompras.some(articulo => parseInt(articulo.id) === parseInt(articuloId))) {
      crearMensajeDialog({tipo: "error", texto: "El articulo ya existe en el carrito de compras"});
   } else {
-    //
+    crearMensajeTransaccion("Agregando articulo al carrito..."); 
     agregarAlCarritoDatos(articuloId);
-    agregarAlCarritoHtml(articuloId);
+    setTimeout(() => {
+                      agregarAlCarritoHtml(articuloId);
+                     },5000);
     //
   }    
   //
@@ -745,11 +610,10 @@ tagInputCrearArticuloPrecio.addEventListener("input",guardarDatosFormulario);
 const tagInputBuscarArticuloCategoria = document.getElementById("idBuscarArticuloCategoria");
 tagInputBuscarArticuloCategoria.addEventListener("input",()=>localStorage.setItem("idBuscarArticuloCategoria",document.getElementById("idBuscarArticuloCategoria").value));
 //
+
 function crearMensajeAviso(texto){
     //
     let htmlContenido;
-    //
-    //
     const tagDiv = document.createElement("div");
     tagDiv.id = "idMensajeAviso";
     tagDiv.className = "mensajeAviso";
@@ -761,45 +625,78 @@ function crearMensajeAviso(texto){
     //
     setTimeout(()=>{tagDiv.remove();},3000);
 };
-//
+
+
+function crearMensajeTransaccion(texto){
+    //
+    let htmlContenido;
+    //
+    //
+    const tagDiv = document.createElement("div");
+    tagDiv.id = "idMensajeAvisoTransaccion";
+    tagDiv.className = "mensajeAvisoTransaccion";
+    //
+    htmlContenido = `<p class="mensajeDialogP">${texto}</p>`;
+    //                        
+    tagDiv.innerHTML = htmlContenido;
+    document.body.appendChild(tagDiv);
+    //
+    setTimeout(()=>{tagDiv.remove();},3000);
+};
+
 function peticionConexion(){
-  
-  crearMensajeAviso("Realizando conexion y cargando Datos");
-  return new Promise((resolve,reject) => {
+  crearMensajeAviso("Realizando conexion...");
+  return new Promise((resolve) => {
      setTimeout(()=> {
         const conexion = true;
-        //
-        if (conexion){
-          //
-           resolve(true);
-        } else {
-           reject(false);
-        }
-        //
+        (conexion) ? (resolve(true)) : (resolve(false));
      },5000)
-  })
+  });
 }
+
+function renderizarLista(lista){
+  crearMensajeAviso("Cargando datos...");
+  const tagContenedorElementos = document.getElementById("idCargaArticulosElementos");
+  let contenidoHtml;
+  lista.forEach(articulo => {
+      const tagFila = document.createElement("div");
+      tagFila.id = "idCargaArticulosFila"+articulo.id; 
+      tagFila.className = "cargaArticulosFila"; 
+      contenidoHtml = `
+                        <h6>Id: ${articulo.id} - Codigo: ${articulo.codigo} - Precio: ${articulo.precio}</h6>
+      `;
+      tagFila.innerHTML = contenidoHtml;
+      tagContenedorElementos.appendChild(tagFila);
+    }
+  );
+};
 
 async function inicioModulo(){
   //
   try {
-  const conectado = await peticionConexion();
-       if (conectado) {
-          //
-          crearMensajeAviso("Cargando Datos");
-          //
-          let listaPreciosArticulosStorage = (JSON.parse(localStorage.getItem("listaPrecioArticulos")) == null) ? ([]) : JSON.parse(localStorage.getItem("listaPrecioArticulos"));
-          //
-          if (listaPreciosArticulosStorage.length > 0) {
+        const conectado = await peticionConexion();
+        const tagSection = document.getElementById("idCargaArticulosContenedor");
+        //
+        if (conectado) {
+           //
+           fetch(url)
+           .then(resp => resp.json())
+           .then(lista => renderizarLista(lista)) 
+           .then(()=> {setTimeout(()=> {(tagSection) && (tagSection.classList.add("ocultarSection"));},5000);})
+           .catch(err=>crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos: "+err}))
+           //
+           let listaPreciosArticulosStorage = (JSON.parse(localStorage.getItem("listaPrecioArticulos")) == null) ? ([]) : JSON.parse(localStorage.getItem("listaPrecioArticulos"));
+           //
+           if (listaPreciosArticulosStorage.length > 0) {
              localStorage.setItem("listaPrecioArticulos", JSON.stringify([...listaPreciosArticulosStorage]));
              listaPrecioArticulos = [...listaPreciosArticulosStorage];
-          } else {
-            localStorage.setItem("listaPrecioArticulos", JSON.stringify([...listaPrecioArticulos]));
-          };
+           } else {
+             localStorage.setItem("listaPrecioArticulos", JSON.stringify([...listaPrecioArticulos]));
+           };
     }
       //
   } catch (error) {
-     crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos"})
+    crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos"})
   } finally {
     crearMensajeAviso("Bienvenidos al Modulo de Compras");
   }

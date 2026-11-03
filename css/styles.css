@@ -11,7 +11,7 @@ body {
 /******************
    CLASES HEADER
 *******************/
-.headerContenedor {
+.headerContenedor{
      display: flex;
      align-content: center;
      justify-content: center;
@@ -19,6 +19,34 @@ body {
 .headerContenedorElementos{
      width: 80%;
 } 
+/********************/
+/********************/
+/********************/
+.cargaArticulosContenedor {     
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 15px;
+}
+.cargaArticulosElementos{   
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 15px;
+     width: 80%;
+     align-items: center;
+}
+.cargaArticulosFila{
+    background-color: green;
+    color: whitesmoke;
+    padding: 15px;
+}
+.ocultarSection{
+    display: none;
+}
+/********************/
+/********************/
+/********************/
 .headerTitulo {
     background-color: rgb(164, 240, 167);  
     color: green;
@@ -58,7 +86,7 @@ body {
 .mainFormulario {
     padding: 10px;
 }
-.mainFormularioFila {
+.mainFormularioFila, .idCargaProductosFila {
     display: flex;
     justify-content: space-between;
     align-items: center;
