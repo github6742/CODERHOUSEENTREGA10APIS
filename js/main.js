@@ -644,8 +644,8 @@ function crearMensajeTransaccion(texto){
     setTimeout(()=>{tagDiv.remove();},3000);
 };
 
-function peticionConexion(){
-  crearMensajeAviso("Realizando conexion...");
+function peticion(texto){
+  (texto.length>0) && crearMensajeAviso(texto);  
   return new Promise((resolve) => {
      setTimeout(()=> {
         const conexion = true;
@@ -674,7 +674,7 @@ function renderizarLista(lista){
 async function inicioModulo(){
   //
   try {
-        const conectado = await peticionConexion();
+        const conectado = await peticion("Realizando conexion....");
         const tagSection = document.getElementById("idCargaArticulosContenedor");
         //
         if (conectado) {
@@ -697,7 +697,8 @@ async function inicioModulo(){
       //
   } catch (error) {
     crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos"})
-  } finally {
+  } finally {    
+    const conectado = await peticion("");
     crearMensajeAviso("Bienvenidos al Modulo de Compras");
   }
 };
