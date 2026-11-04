@@ -633,14 +633,31 @@ function renderizarLista(lista){
   const tagContenedorElementos = document.getElementById("idCargaArticulosElementos");
   let contenidoHtml;
   lista.forEach(articulo => {
-      const tagFila = document.createElement("div");
-      tagFila.id = "idCargaArticulosFila"+articulo.id; 
-      tagFila.className = "cargaArticulosFila"; 
+      const card = document.createElement("div");
+      card.id = "idCargaArticulosCard"+articulo.id; 
+      card.className = "cargaArticulosCard"; 
       contenidoHtml = `
-                        <h6>Id: ${articulo.id} - Codigo: ${articulo.codigo} - Precio: ${articulo.precio}</h6>
+                       <div class="cardFilaCampos">
+                        <h4 class="cardLabel">Id:</h4><h4 class="cardValue">${articulo.id}</h4>
+                       </div>
+                       <div class="cardFilaCampos">
+                        <h5 class="cardLabel">Codigo:</h4><h4 class="cardValue">${articulo.codigo}</h5>
+                       </div>
+                       <div class="cardFilaCampos">
+                        <h5 class="cardLabel">Nombre:</h4><h4 class="cardValue">${articulo.nombre}</h5>
+                       </div>
+                       <div class="cardFilaCampos">
+                        <h5 class="cardLabel">Marca:</h4><h4 class="cardValue">${articulo.marca}</h5>
+                       </div>
+                       <div class="cardFilaCampos">
+                        <h5 class="cardLabel">Categoria:</h4><h4 class="cardValue">${articulo.categoria}</h5>
+                       </div>
+                       <div class="cardFilaCampos">
+                        <h5 class="cardLabel">Precio:</h4><h4 class="cardValue">${articulo.precio}</h5>
+                       </div>
       `;
-      tagFila.innerHTML = contenidoHtml;
-      tagContenedorElementos.appendChild(tagFila);
+      card.innerHTML = contenidoHtml;
+      tagContenedorElementos.appendChild(card);
     }
   );
 };
@@ -659,7 +676,7 @@ async function inicioModulo(){
                             listaPrecioArticulos = [...lista]
                             renderizarLista(lista)
                           })
-           .then(()=> {setTimeout(()=> {(tagSection) && (tagSection.classList.add("ocultarSection"));},5000);})
+           .then(()=> {setTimeout(()=> {(tagSection) && (tagSection.classList.add("ocultarSection"));},7000);})
            .catch(err=>crearMensajeAvisoToast("No se logro cargar los articulos: " + err))
            //
            let listaPreciosArticulosStorage = (JSON.parse(localStorage.getItem("listaPrecioArticulos")) == null) ? ([]) : JSON.parse(localStorage.getItem("listaPrecioArticulos"));

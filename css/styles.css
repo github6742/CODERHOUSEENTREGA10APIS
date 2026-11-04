@@ -31,18 +31,38 @@ body {
 .cargaArticulosElementos{   
      display: flex;
      flex-direction: column;
-     align-items: center;
-     padding: 15px;
+     align-items: flex-start;
+     padding: 5px;
      width: 80%;
-     align-items: center;
 }
-.cargaArticulosFila{
+.cargaArticulosCard{
     background-color: green;
     color: whitesmoke;
-    padding: 15px;
+    width: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    margin: 5px 10px 10px 5px;
+}
+.cardFilaCampos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: blueviolet;
+    padding: 5px;
+    margin: 5px;
+}
+.cardLabel{
+    background-color: black;
+    padding: 2px;
+    min-width: 150px;
+}
+.cardValue{
+    background-color: gray;
+    padding: 2px;
+    width: 100%;
 }
 .ocultarSection{
-    display: none;
+    display: none; 
 }
 /********************/
 /********************/
@@ -288,22 +308,6 @@ body {
     width: 900px;
     text-align: center;
 }
-.toastTransaccionTop{
-    color: #ddeeec;
-    background-color:  green;
-    border: 2px solid  greenyellow;
-    position: fixed;
-    border-radius: 15px;
-    padding: 20px 10px 20px 10px;
-    top: 10%;
-    left: 70%;
-    z-index: 1000;
-    font-size: 20px;
-    font-weight: bold;
-    overflow-wrap: break-word;
-    align-items: center;
-}
- 
 .toastTransaccionTop{
     color: #ddeeec;
     background-color:  green;
