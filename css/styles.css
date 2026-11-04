@@ -272,7 +272,7 @@ body {
     font-size: 20px;
     padding: 5px;
 }
-.mensajeAviso{    
+.toastLargoTop{
     color:whitesmoke;
     background-color: green;
     border: 2px solid greenyellow;
@@ -288,7 +288,23 @@ body {
     width: 900px;
     text-align: center;
 }
-.mensajeAvisoTransaccion{
+.toastTransaccionTop{
+    color: #ddeeec;
+    background-color:  green;
+    border: 2px solid  greenyellow;
+    position: fixed;
+    border-radius: 15px;
+    padding: 20px 10px 20px 10px;
+    top: 10%;
+    left: 70%;
+    z-index: 1000;
+    font-size: 20px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    align-items: center;
+}
+ 
+.toastTransaccionTop{
     color: #ddeeec;
     background-color:  green;
     border: 2px solid  greenyellow;

@@ -45,30 +45,45 @@ document.getElementById("idCrearArticuloPrecio").value = articuloFormulario.prec
 document.getElementById("idBuscarArticuloCategoria").value = localStorage.getItem("idBuscarArticuloCategoria") || "";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-function crearMensajeDialog({tipo, texto}){
-    //
-    let titulo;
-    let htmlContenido;
-    //
-    tipo === "exito" ? titulo ="✔ Correcto" : titulo="❌ Error";
-    //
-    const tagDialog = document.createElement("dialog");
-    tagDialog.id = "idMensajeDialog";
-    tagDialog.className = "mensajeDialog";
-    //
-    htmlContenido = `<h3 class="mensajeDialogH3">${titulo}</h3>
-                        <p class="mensajeDialogP">${texto}</p>
-                        <button id="idMensajeDialogButton" class="buttonGlobal">Aceptar</button>`;
-    //                        
-    tagDialog.innerHTML = htmlContenido;
-    document.body.appendChild(tagDialog);
-    tagDialog.showModal();     
-    //  
-    const tagMensajeDialogButton = document.getElementById("idMensajeDialogButton");
-    //
-    (tagMensajeDialogButton) && (tagMensajeDialogButton.addEventListener("click", function() {tagDialog.close();tagDialog.remove();}));
-    //
-};
+function crearMensajeAvisoToast(texto){
+//  
+Toastify({
+  text: texto,
+  duration: 3000,
+  destination: "#",
+  newWindow: false,
+  close:false,
+  className: "toastLargoTop",
+  gravity: "top", // `top` or `bottom`
+  position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+  onClick: function(){} // Callback after click
+}).showToast();
+//
+}
+function crearMensajeTransaccionToast(texto){
+//  
+Toastify({
+  text: texto,
+  duration: 3000,
+  destination: "#",
+  newWindow: false,
+  close:false,
+  className: "toastTransaccionTop",
+  gravity: "top", // `top` or `bottom`
+  position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+  onClick: function(){} // Callback after click
+}).showToast();
+//
+}
+
 
 function cargarArticulo(e){
   //
@@ -81,9 +96,11 @@ function cargarArticulo(e){
   const precio = document.getElementById("idCrearArticuloPrecio").value;
   //
   if (listaPrecioArticulos.some(articulo => articulo.codigo.toUpperCase() == codigo.toUpperCase() )){
-     crearMensajeDialog({tipo: "error", texto: "Ya existe un articulo con ese codigo"});
+     //crearMensajeDialog({tipo: "error", texto: "Ya existe un articulo con ese codigo"});
+     crearMensajeTransaccionToast("Ya existe un articulo con ese codigo");
   } else if (listaPrecioArticulos.some(articulo => articulo.nombre.toUpperCase() == nombre.toUpperCase() )){
-     crearMensajeDialog({tipo:"error", texto:"Ya existe un articulo con ese nombre"});
+     //crearMensajeDialog({tipo:"error", texto:"Ya existe un articulo con ese nombre"});
+     crearMensajeTransaccionToast("Ya existe un articulo con ese nombre");
   } else {
      //
      const id = listaPrecioArticulos.length + 1;  
@@ -116,7 +133,8 @@ function cargarArticulo(e){
      document.getElementById("idCrearArticuloCategoria").value = "";
      document.getElementById("idCrearArticuloPrecio").value = "";
      //
-     crearMensajeDialog({tipo: "exito", texto: "El articulo se creo satisfactoriamente"});
+     //crearMensajeDialog({tipo: "exito", texto: "El articulo se creo satisfactoriamente"});
+     crearMensajeTransaccionToast("El articulo se creo satisfactoriamente");
      //
   }
   //
@@ -142,7 +160,9 @@ function eliminarDelCarritoHtml(articuloId){
      tagIdTotalCarrito.innerText = `Total del Carrito de Compras: $${parseInt(totalCarrito)}`;
   }
   //
-  crearMensajeDialog({tipo: "exito", texto: "El articulo fue eliminado"});
+  //crearMensajeDialog({tipo: "exito", texto: "El articulo fue eliminado"});
+  crearMensajeTransaccionToast("El articulo fue eliminado");
+
   //   
 }
 
@@ -270,8 +290,6 @@ function agregarAlCarritoDatos(articuloId){
     //
   };
   //
-  //crearMensajeDialog({tipo: "exito", texto: "El articulo fue agregado"});   
-  //  
 }
 
 function agregarAlCarritoHtml(articuloId){
@@ -285,9 +303,10 @@ function agregarAlCarrito(e,articuloId){
   e.preventDefault();
   // 
   if (carritoCompras.some(articulo => parseInt(articulo.id) === parseInt(articuloId))) {
-     crearMensajeDialog({tipo: "error", texto: "El articulo ya existe en el carrito de compras"});
+     //crearMensajeDialog({tipo: "error", texto: "El articulo ya existe en el carrito de compras"});
+     crearMensajeTransaccionToast("El articulo ya existe en el carrito de compras");
   } else {
-    crearMensajeTransaccion("Agregando articulo al carrito..."); 
+    crearMensajeTransaccionToast("Agregando articulo al carrito..."); 
     agregarAlCarritoDatos(articuloId);
     setTimeout(() => {
                       agregarAlCarritoHtml(articuloId);
@@ -417,7 +436,8 @@ function verCarritoCompras(e){
   //
   if ((carritoCompras.length === 0) ) {
      //
-     crearMensajeDialog({tipo: "error", texto: "El carrito de compras esta vacio"});       
+     //crearMensajeDialog({tipo: "error", texto: "El carrito de compras esta vacio"});       
+     crearMensajeTransaccionToast("El carrito de compras esta vacio")
      //
   } else {
     //
@@ -511,7 +531,8 @@ function ocultarCarritoCompras(e){
   const tagIdMainCarritoCompras = document.getElementById("idMainCarritoCompras");
   //
   if ((tagIdMainCarritoCompras.childElementCount === 0) && (carritoCompras.length > 0)){
-    crearMensajeDialog({tipo: "error", texto: "El carrito ya esta oculto"})
+    //crearMensajeDialog({tipo: "error", texto: "El carrito ya esta oculto"})
+    crearMensajeTransaccionToast("El carrito ya esta oculto")
   } else if ((tagIdMainCarritoCompras.childElementCount > 0) && (carritoCompras.length > 0)){
      //
      carritoCompras.forEach(articulo => {
@@ -527,7 +548,8 @@ function ocultarCarritoCompras(e){
      (tagIdTotalCarrito) && (tagIdTotalCarrito.innerHTML=``);
      //
   } else {
-    crearMensajeDialog({tipo: "error",texto:"El carrito de compras esta vacio"})
+    //crearMensajeDialog({tipo: "error",texto:"El carrito de compras esta vacio"})
+    crearMensajeTransaccionToast("El carrito de compras esta vacio")
  }
 }   
 
@@ -546,9 +568,11 @@ function vaciarCarritoCompras(e){
      (tagIdTotalCarrito) && (tagIdTotalCarrito.innerHTML=``);
      //
      carritoCompras.splice(0,carritoCompras.length);
-     crearMensajeDialog({tipo: "exito", texto: "Se eliminaron los articulos del carrito"})
+     //crearMensajeDialog({tipo: "exito", texto: "Se eliminaron los articulos del carrito"})
+     crearMensajeTransaccionToast("Se eliminaron los articulos del carrito")
   }else{ 
-     crearMensajeDialog({tipo: "error", texto: "El carrito de compras esta vacio"})
+     //crearMensajeDialog({tipo: "error", texto: "El carrito de compras esta vacio"})
+     crearMensajeTransaccionToast("El carrito de compras esta vacio")
   };
   localStorage.setItem("carritoCompras", JSON.stringify(carritoCompras));
 }   
@@ -557,8 +581,10 @@ function confirmarCarritoCompras(e){
   //
   e.preventDefault();
   //
-  (carritoCompras.length > 0) ? crearMensajeDialog({tipo: "exito", texto: "Se comfirmo la compra"}) 
-                              : crearMensajeDialog({tipo: "error", texto: "El carrito de compras esta vacio"});
+  /*(carritoCompras.length > 0) ? crearMensajeDialog({tipo: "exito", texto: "Se comfirmo la compra"}) 
+                              : crearMensajeDialog({tipo: "error", texto: "El carrito de compras esta vacio"});*/
+  (carritoCompras.length > 0) ? crearMensajeTransaccionToast("Se comfirmo la compra") 
+                              : crearMensajeTransaccionToast("El carrito de compras esta vacio");
 }  
 //
 /////////////////////////////////////////////////////////////////////////////
@@ -611,41 +637,8 @@ const tagInputBuscarArticuloCategoria = document.getElementById("idBuscarArticul
 tagInputBuscarArticuloCategoria.addEventListener("input",()=>localStorage.setItem("idBuscarArticuloCategoria",document.getElementById("idBuscarArticuloCategoria").value));
 //
 
-function crearMensajeAviso(texto){
-    //
-    let htmlContenido;
-    const tagDiv = document.createElement("div");
-    tagDiv.id = "idMensajeAviso";
-    tagDiv.className = "mensajeAviso";
-    //
-    htmlContenido = `<p class="mensajeDialogP">${texto}</p>`;
-    //                        
-    tagDiv.innerHTML = htmlContenido;
-    document.body.appendChild(tagDiv);
-    //
-    setTimeout(()=>{tagDiv.remove();},3000);
-};
-
-
-function crearMensajeTransaccion(texto){
-    //
-    let htmlContenido;
-    //
-    //
-    const tagDiv = document.createElement("div");
-    tagDiv.id = "idMensajeAvisoTransaccion";
-    tagDiv.className = "mensajeAvisoTransaccion";
-    //
-    htmlContenido = `<p class="mensajeDialogP">${texto}</p>`;
-    //                        
-    tagDiv.innerHTML = htmlContenido;
-    document.body.appendChild(tagDiv);
-    //
-    setTimeout(()=>{tagDiv.remove();},3000);
-};
-
 function peticion(texto){
-  (texto.length>0) && crearMensajeAviso(texto);  
+  (texto.length>0) && crearMensajeAvisoToast(texto);  
   return new Promise((resolve) => {
      setTimeout(()=> {
         const conexion = true;
@@ -655,7 +648,7 @@ function peticion(texto){
 }
 
 function renderizarLista(lista){
-  crearMensajeAviso("Cargando datos...");
+  crearMensajeAvisoToast("Cargando datos...");
   const tagContenedorElementos = document.getElementById("idCargaArticulosElementos");
   let contenidoHtml;
   lista.forEach(articulo => {
@@ -683,7 +676,8 @@ async function inicioModulo(){
            .then(resp => resp.json())
            .then(lista => renderizarLista(lista)) 
            .then(()=> {setTimeout(()=> {(tagSection) && (tagSection.classList.add("ocultarSection"));},5000);})
-           .catch(err=>crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos: "+err}))
+           //.catch(err=>crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos: "+err}))
+           .catch(err=>crearMensajeAvisoToast("No se logro cargar los articulos: " + err))
            //
            let listaPreciosArticulosStorage = (JSON.parse(localStorage.getItem("listaPrecioArticulos")) == null) ? ([]) : JSON.parse(localStorage.getItem("listaPrecioArticulos"));
            //
@@ -696,10 +690,11 @@ async function inicioModulo(){
     }
       //
   } catch (error) {
-    crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos"})
+    //crearMensajeDialog({tipo: "error", texto: "No se logro cargar los articulos"})
+    crearMensajeAvisoToast("No se logro cargar los articulos")
   } finally {    
     const conectado = await peticion("");
-    crearMensajeAviso("Bienvenidos al Modulo de Compras");
+    crearMensajeAvisoToast("Bienvenidos al Modulo de Compras");
   }
 };
 
